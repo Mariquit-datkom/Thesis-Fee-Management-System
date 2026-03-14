@@ -1,0 +1,98 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('../assets/images/login_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.form-container {
+    width: 320px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    animation: slideDown 0.5s ease-out;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideDown {
+    from {transform: translateY(-50px); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
+}
+
+.form-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.school-logo {
+    width: auto;
+    height: 150px;
+}
+
+.form-title-container {
+    margin-top: 8px;
+    margin-bottom: 10px;
+    color: #1A1A1A;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+form {
+    height: 12vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 0;
+}
+
+.form-label {
+    color: #1A1A1A;
+    font-size: 1.2rem;
+}
+
+.form-input {
+    outline: none;
+    margin-left: 3px;
+    padding: 4px 0;
+    padding-left: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.btn-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {    
+    padding: 3px 15px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #f3f3f3;
+    background-color: #0066CC;
+}
+
+.btn:hover {
+    background-color: #004C99;
+}

@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="libs/fontawesome-free-7.2.0-web/css/all.min.css">

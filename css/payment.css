@@ -1,0 +1,99 @@
+.content-container {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: auto auto minmax(200px, auto) minmax(200px, auto); 
+}
+
+.balance-container {
+    grid-column: 1 / 16;
+    background-color: #00C853;
+    border: 1px #009e42 solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.balance-display {
+    font-weight: 700;
+    font-size: 23px;
+    margin: 13px 0;
+}
+
+form {
+    grid-column: 1 / 16;
+    display: grid;
+    grid-template-columns: 1, 1fr;
+    grid-template-rows: 1, 1fr;
+}
+
+.search-row {    
+    grid-area: 1 / 1 / 1 / 1;   
+    margin: 10px 0; 
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: 1, 1fr;
+}
+
+.student-search-container {
+    grid-column: 1 / 13;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.student-search-label {
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.student-search-input {
+    flex-grow: 1;
+    outline: 0;
+    border: 0.5px #d0d0d0 solid;
+    border-radius: 5px;
+    padding: 5px 0;
+    padding-left: 5px;
+    font-size: 18px;
+}
+
+.btn-container {
+    grid-column: 13 / 16;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 25px;
+    gap: 15px;
+}
+
+.btn {
+    flex-grow: 1;
+    padding: 8px 0;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-submit {
+    background-color: #00C853;
+    border: 1px #009e42 solid;
+}
+
+.btn-reset {
+    background-color: #6c757d;
+    border: 1px #53595f solid;
+}
+
+.fee-breakdown-container {    
+    grid-column: 1 / 16;
+    grid-row: 3;
+}
+
+.other-payment-container {    
+    grid-column: 1 / 16;
+    grid-row: 4;
+}
