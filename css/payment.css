@@ -12,12 +12,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 700;
+    font-size: 23px;
 }
 
 .balance-display {
-    font-weight: 700;
-    font-size: 23px;
     margin: 13px 0;
+    margin-left: 5px;
 }
 
 form {
@@ -91,6 +92,37 @@ form {
 .fee-breakdown-container {    
     grid-column: 1 / 16;
     grid-row: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-header {
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.content-title {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+#fee-table {
+    flex-grow: 1;
+    border-collapse: collapse;
+}
+
+#fee-table, #fee-table td, #fee-table th {
+    border: 1px #53595f solid;    
+}
+
+#fee-table th {
+    padding: 5px 0;
+    background-color: #3c8fe3;
+}
+
+#fee-table td {
+    text-align: center;
+    vertical-align: middle;
 }
 
 .other-payment-container {    
