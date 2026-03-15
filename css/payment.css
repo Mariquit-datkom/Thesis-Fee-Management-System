@@ -2,7 +2,7 @@
     flex-grow: 1;
     display: grid;
     grid-template-columns: repeat(15, 1fr);
-    grid-template-rows: auto auto minmax(200px, auto) minmax(200px, auto); 
+    grid-template-rows: auto auto minmax(200px, auto) minmax(200px, auto) minmax(100px, auto); 
 }
 
 .balance-container {
@@ -128,4 +128,10 @@ form {
 .other-payment-container {    
     grid-column: 1 / 16;
     grid-row: 4;
+    margin-top: 15px;
+}
+
+.payment-btn-container {      
+    grid-column: 1 / 16;
+    grid-row: 5;
 }
