@@ -93,17 +93,29 @@
                 </table>
             </div>
             <div class="other-payment-container">
-                <div class="content-header"><span class="content-title">Other payments:</span></div>
-
+                <div class="content-header">
+                    <span class="content-title">Other payments:</span>
+                    <button type="button" class="btn btn-add-row" id="add-payment-row" style="background-color: #3c8fe3; padding: 5px 10px; margin-left: 10px;">+ Add Item</button>
+                </div>
+                <table id="other-payments-table">
+                    <thead>
+                        <tr>
+                            <th>Payment For</th> <th>Amount (Php)</th> <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="other-payments-body">
+                        </tbody>
+                </table>
             </div>
             <div class="payment-btn-container">
-
+                <input type="button" value="Pay" class="pay-btn" onclick="processPayment()">
             </div>
         </div>
     </div>
 
-    <script src="js/updateBalance.js"></script>
     <script src="js/validateStudentId.js"></script>
     <script src="js/resetPaymentPage.js"></script>
+    <script src="js/otherPayments.js"></script>
+    <script src="js/processPayment.js"></script>
 </body>
 </html>

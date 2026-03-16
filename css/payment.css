@@ -141,7 +141,38 @@ form {
     margin-top: 15px;
 }
 
+#other-payments-table {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 10px;
+}
+
+#other-payments-table th{
+    border: 1px #53595f solid; 
+    background-color: #3c8fe3; 
+    padding: 5px;
+}
+
+#other-payments-table th:last-child {
+    width: 100px;
+}
+
 .payment-btn-container {      
     grid-column: 1 / 16;
     grid-row: 5;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pay-btn {
+    width: 500px;
+    padding: 10px 0;
+    background-color: #00C853;
+    border: 1px #009e42 solid;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    color: #ffffff;
 }

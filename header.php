@@ -4,7 +4,6 @@
         <div class="nav-item-container">
             <?php
                 $navItems = [
-                    'adminDashboard.php' => ['text' => 'Dashboard'],
                     'payment.php' => ['text' => 'Payment'],
                     'studentRecords.php' => ['text' => 'Student Records']
                 ];
