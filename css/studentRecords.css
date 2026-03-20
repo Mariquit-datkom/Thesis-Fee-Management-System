@@ -82,15 +82,16 @@ form {
 }
 
 .btn-generate-soa {
-    background-color: #a4b0bb; 
+    background-color: #6c757d;
+    border: 1px #53595f solid; 
+    color: #fff;
     width: 150px;
     padding: 10px 0;
-    border: 1px #767b81 solid;
     border-radius: 10px;
     font-size: 15px;
     cursor: pointer;
 }
 
 .btn-generate-soa:hover {    
-    background-color: #767b81;
+    background-color: #686c71;
 }

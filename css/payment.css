@@ -77,9 +77,17 @@ form {
     border: 1px #009e42 solid;
 }
 
+.btn-submit:hover {
+    background-color: #00b54c;
+}
+
 .btn-reset {
     background-color: #6c757d;
     border: 1px #53595f solid;
+}
+
+.btn-reset:hover {
+    background-color: #686c71;
 }
 
 .fee-breakdown-container {    
@@ -179,4 +187,12 @@ form {
     font-size: 15px;
     cursor: pointer;
     color: #ffffff;
+}
+
+.pay-btn:hover {
+    background-color: #00b54c;
+}
+
+.pay-btn:disabled {
+    background-color: #00b54c;
 }
