@@ -52,18 +52,16 @@ if (file_exists($spreadsheetFile)) {
         <div class="content-container">
             <form method="post" autocomplete="off">
                 <div class="search-row">                       
-                    <input 
-                        type="text"  
-                        class="student-search-input" 
-                        id="student-id" 
-                        placeholder="Search...">
+                    <input type="text" class="student-search-input" id="student-id" placeholder="Search..." oninput="filterTable()">
+                    <button type="button" class="search-btn"><i class="fa fa-search"></i></button>
                 </div>
-            </form>                
+            </form>    
 
-            <div class="scrollable-table">
-                <div class="content-header">
-                    <span class="content-title">Student Information Registry</span>
-                </div>
+            <div class="content-header">
+                <span class="content-title">Student Information Registry</span>
+            </div>
+
+            <div class="scrollable-table">                
                 <?php if (isset($error)): ?>
                     <p style="padding: 20px; color: red;"><?php echo $error; ?></p>
                 <?php else: ?>

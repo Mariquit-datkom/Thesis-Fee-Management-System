@@ -9,18 +9,42 @@ form {
     flex-grow: 1;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: stretch;
     margin: 15px 20px;
+    border: 0.5px #d0d0d0 solid;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .student-search-input {
     flex-grow: 1;
     outline: 0;
-    border: 0.5px #d0d0d0 solid;
-    border-radius: 5px;
+    border: none;
     padding: 5px 0;
     padding-left: 5px;
     font-size: 18px;
+}
+
+.search-btn {
+    width: 50px;
+    background-color: #ececec;
+    outline: 0;
+    border: none;
+}
+
+.content-header {
+    grid-column: 1 / 16;
+    grid-row: 2;   
+    margin: 0 20px;  
+}
+
+.scrollable-table { 
+    grid-column: 1 / 16;
+    grid-row: 3; 
+    max-height: 70vh;;
+    overflow-x: hidden;
+    overflow-y: auto; 
+    margin: 0 20px;
 }
 
 .record-table { 
@@ -49,15 +73,6 @@ form {
 
 .record-table th:not(:last-child):hover { 
     background-color: #2a6db0; 
-}
-
-.scrollable-table { 
-    grid-column: 1 / 16;
-    grid-row: 2; 
-    max-height: 70vh;;
-    overflow-x: hidden;
-    overflow-y: auto; 
-    margin: 0 20px;
 }
 
 .sort-icon { 
