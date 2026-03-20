@@ -28,7 +28,7 @@ document.getElementById('add-payment-row').addEventListener('click', function() 
 function calculateGrandTotal() {
     let total = 0;
 
-    document.querySelectorAll('.fee-checkbox:checked').forEach(checkedBox => {
+    document.querySelectorAll('.full-pay-checkbox:checked').forEach(checkedBox => {
         total += parseFloat(checkedBox.getAttribute('data-price')) || 0;
     });
 
@@ -39,6 +39,20 @@ function calculateGrandTotal() {
     document.getElementById('balance-display').innerText = total.toFixed(2);
 }
 
-document.querySelectorAll('.fee-checkbox').forEach(checkbox => {
-    checkbox.addEventListener('change', calculateGrandTotal);
+document.querySelectorAll('.full-pay-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        calculateGrandTotal();
+
+        const row = this.closest('.fee-row');
+        const partialInput = row.querySelector('.partial-amount-input');
+
+        if (this.checked) {
+            partialInput.value = "";
+            partialInput.disabled = true;
+            partialInput.style.backgroundColor = "#c6c6c6";
+        } else {
+            partialInput.disabled = false;
+            partialInput.style.backgroundColor = "";
+        }
+    });
 });

@@ -77,7 +77,7 @@
                     <tbody>
                         <?php if ($searchPerformed && !empty($fees)): ?>
                             <?php foreach ($fees as $fee): ?>
-                                <tr>                                                                 
+                                <tr class="fee-row">                                                                 
                                     <td><?php echo htmlspecialchars($fee['name']); ?></td>
                                     <td>Php <?php echo number_format($fee['amount'], 2); ?></td>
                                     <td><input type="checkbox" class="full-pay-checkbox" onchange="togglePartialInput(this)" data-price="<?php echo $fee['amount']; ?>"></td>
