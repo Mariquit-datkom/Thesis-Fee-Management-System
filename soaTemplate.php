@@ -1,12 +1,12 @@
 <?php
 // Note: $name, $yearCourse, $date, $receiptItems, and $total 
 // are provided by the include context in handlePayment.php
-
+/*
 $name = '';
 $yearCourse = '';
 $date = '';
 $soaItems = [];
-$total = 0;
+$total = 0; */
 
 date_default_timezone_set('Asia/Manila');
 ?>

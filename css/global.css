@@ -67,3 +67,21 @@ body {
     justify-content: flex-end;
     gap: 25px;
 }
+
+.content-container {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: max-content;
+    align-content: start;
+}
+
+.content-header {
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.content-title {
+    font-size: 23px;
+    font-weight: 600;
+}

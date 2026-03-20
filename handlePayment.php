@@ -98,7 +98,7 @@ $yearCourse = $yearStrand;
 $date = $dateOfPayment;
 $receiptItems = $displayItems;
 $total = $totalAmount;
-$referenceNumber = date('Ymd-His');
+$referenceNumber = date('YmdHis');
 include 'receiptTemplate.php';
 $html = ob_get_clean();
 
@@ -106,7 +106,7 @@ try {
     $mpdf = new Mpdf(['format' => 'A5']);
     $mpdf->WriteHTML($html);
 
-    $savePath = "assets/docs/receipts/";
+    $savePath = "assets/docs/receipts/" . $studentId . "/";
     if (!is_dir($savePath)) mkdir($savePath, 0777, true);
 
     $fileName = "{$studentId}-{$referenceNumber}.pdf";

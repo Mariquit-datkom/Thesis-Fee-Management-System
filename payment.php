@@ -66,9 +66,9 @@
                 <table id="fee-table">
                     <thead>
                         <tr>
-                            <th>Pay</th>
                             <th>Fee Name</th>
                             <th>Amount</th>
+                            <th>Pay</th>
                         </tr>
                     </thead>
                     <tbody>

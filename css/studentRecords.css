@@ -1,0 +1,81 @@
+form {
+    grid-column: 1 / 16;
+    grid-row: 1;
+    display: block;
+    height: fit-content;
+}
+
+.search-row {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 15px 20px;
+}
+
+.student-search-input {
+    flex-grow: 1;
+    outline: 0;
+    border: 0.5px #d0d0d0 solid;
+    border-radius: 5px;
+    padding: 5px 0;
+    padding-left: 5px;
+    font-size: 18px;
+}
+
+.record-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    background: white; 
+}
+
+.record-table th, .record-table td { 
+    border: 1px solid #53595f; 
+    padding: 12px; 
+    text-align: left; 
+}
+
+.record-table th { 
+    background-color: #3c8fe3;
+    cursor: pointer; 
+    position: sticky; 
+    top: 0; 
+    user-select: none;
+}
+
+.record-table th:last-child {
+    cursor: default;
+}
+
+.record-table th:not(:last-child):hover { 
+    background-color: #2a6db0; 
+}
+
+.scrollable-table { 
+    grid-column: 1 / 16;
+    grid-row: 2; 
+    max-height: 70vh;;
+    overflow-x: hidden;
+    overflow-y: auto; 
+    margin: 0 20px;
+}
+
+.sort-icon { 
+    font-size: 0.8em; 
+    margin-left: 5px; 
+    float: right; 
+}
+
+.btn-generate-soa {
+    background-color: #a4b0bb; 
+    width: 150px;
+    padding: 10px 0;
+    border: 1px #767b81 solid;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-generate-soa:hover {    
+    background-color: #767b81;
+}
