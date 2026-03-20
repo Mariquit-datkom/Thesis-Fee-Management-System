@@ -51,12 +51,14 @@ try {
             break;
         }
     }
-    
-    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-    $writer->save($spreadsheetFile);
 
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => 'Spreadsheet Error: ' . $e->getMessage()]);
+    exit;
+}
+
+if ($studentRowIndex === -1) {
+    echo json_encode(['success' => false, 'message' => 'Student ID not found in records.']);
     exit;
 }
 
@@ -68,18 +70,38 @@ try {
 
     foreach ($items as $paidItem) {
         $feeName = trim($paidItem['name']);
+        $paymentAmount = floatval($paidItem['amount']);
+        $isFull = $paidItem['isFull'] ?? false;
         
         for ($col = 'A'; $col <= $highestColumn; $col++) {
             $headerValue = trim($sheet->getCell($col . "3")->getValue());
             
             if ($headerValue == $feeName) {
-                $sheet->setCellValue($col . $studentRowIndex, "PAID");
-            }
+                $cellCoordinate = $col . $studentRowIndex;
+                
+                if ($isFull) {
+                    // Option A: If they checked 'Full Payment', just mark PAID
+                    $sheet->setCellValue($cellCoordinate, "PAID");
+                } else {
+                    // Option B: Partial Payment subtraction
+                    $currentValue = $sheet->getCell($cellCoordinate)->getValue();
+                    
+                    // If the cell is currently "PAID" or empty, treat as 0, otherwise subtract
+                    $currentBalance = is_numeric($currentValue) ? floatval($currentValue) : 0;
+                    $newBalance = $currentBalance - $paymentAmount;
 
-            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-            $writer->save($spreadsheetFile);
+                    if ($newBalance <= 0) {
+                        $sheet->setCellValue($cellCoordinate, "PAID");
+                    } else {
+                        $sheet->setCellValue($cellCoordinate, round($newBalance, 2));
+                    }
+                }
+            }    
         }
-    }        
+    }
+
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $writer->save($spreadsheetFile);        
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => 'Spreadsheet Error: ' . $e->getMessage()]);
     exit;

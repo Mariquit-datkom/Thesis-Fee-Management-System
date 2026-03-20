@@ -52,7 +52,13 @@ if (file_exists($spreadsheetFile)) {
         <div class="content-container">
             <form method="post" autocomplete="off">
                 <div class="search-row">                       
-                    <input type="text" class="student-search-input" id="student-id" placeholder="Search..." oninput="filterTable()">
+                    <input 
+                        type="text" 
+                        class="student-search-input" 
+                        id="student-id" 
+                        placeholder="Search..." 
+                        title="Search for student id or name here"
+                        oninput="filterTable()">
                     <button type="button" class="search-btn"><i class="fa fa-search"></i></button>
                 </div>
             </form>    

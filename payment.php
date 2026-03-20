@@ -80,8 +80,8 @@
                                 <tr class="fee-row">                                                                 
                                     <td><?php echo htmlspecialchars($fee['name']); ?></td>
                                     <td>Php <?php echo number_format($fee['amount'], 2); ?></td>
-                                    <td><input type="checkbox" class="full-pay-checkbox" onchange="togglePartialInput(this)" data-price="<?php echo $fee['amount']; ?>"></td>
-                                    <td><input type="number" class="partial-amount-input" placeholder="0.00" step="1" min="0"></td>
+                                    <td><input type="checkbox" class="full-pay-checkbox" data-price="<?php echo $fee['amount']; ?>"></td>
+                                    <td><input type="number" class="partial-amount-input" placeholder="0.00" step="1" min="0" oninput="partialPaymentLimiter(this) ,calculateGrandTotal()"></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php elseif ($searchPerformed): ?>

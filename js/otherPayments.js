@@ -36,6 +36,10 @@ function calculateGrandTotal() {
         total += parseFloat(input.value) || 0;
     });
 
+    document.querySelectorAll('.partial-amount-input').forEach(input => {
+        total += parseFloat(input.value) || 0;
+    });
+
     document.getElementById('balance-display').innerText = total.toFixed(2);
 }
 
@@ -56,3 +60,21 @@ document.querySelectorAll('.full-pay-checkbox').forEach(checkbox => {
         }
     });
 });
+
+function partialPaymentLimiter(inputElement) {
+    const row = inputElement.closest('.fee-row');
+    
+    const fullPayCheckbox = row.querySelector('.full-pay-checkbox');
+    const maxAmount = parseFloat(fullPayCheckbox.getAttribute('data-price'));
+
+    let currentValue = parseFloat(inputElement.value);
+
+    if (currentValue >= maxAmount) {
+        alert("Partial payment cannot be equal to or greater than the full amount. Please use the Full Payment checkbox instead.");
+        inputElement.value = (maxAmount - 1).toFixed(2);
+    }
+
+    if (currentValue < 0) {
+        inputElement.value = 0;
+    }
+}
