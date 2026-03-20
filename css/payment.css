@@ -111,9 +111,32 @@ form {
     font-size: 17px;
 }
 
-.fee-checkbox {
+#fee-table td:nth-child(1),
+#fee-table td:nth-child(2)  {
+    width: 35%;
+}
+
+#fee-table td:nth-child(3) {
+    width: 13%;
+}
+
+#fee-table td:nth-child(4) {
+    width:17%;
+}
+
+.full-pay-checkbox {
     width: 20px;
     height: 20px;
+}
+
+.partial-amount-input {
+    width: 90%; 
+    border: none; 
+    outline: none; 
+    font-size: 16px; 
+    text-align: center; 
+    padding: 7px;
+    border: 1px #adadad solid;
 }
 
 .other-payment-container {    

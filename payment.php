@@ -17,7 +17,9 @@
     // Handle the Search Form Submission
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['student-search-input'])) {
         $studentId = $_POST['student-search-input'];
-        $fees = getStudentFees($studentId);
+        $result = getStudentFees($studentId);
+        $fees = $result['fees'];
+        $studentExists = $result['exists'];
         $searchPerformed = true;
     }
 ?>
@@ -68,7 +70,8 @@
                         <tr>
                             <th>Fee Name</th>
                             <th>Amount</th>
-                            <th>Pay</th>
+                            <th>Full Payment</th>
+                            <th>Partial Payment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,17 +80,18 @@
                                 <tr>                                                                 
                                     <td><?php echo htmlspecialchars($fee['name']); ?></td>
                                     <td>Php <?php echo number_format($fee['amount'], 2); ?></td>
-                                    <td><input type="checkbox" class="fee-checkbox" data-price="<?php echo $fee['amount']; ?>"></td>
+                                    <td><input type="checkbox" class="full-pay-checkbox" onchange="togglePartialInput(this)" data-price="<?php echo $fee['amount']; ?>"></td>
+                                    <td><input type="number" class="partial-amount-input" placeholder="0.00" step="1" min="0"></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php elseif ($searchPerformed): ?>
                             <?php if ($studentExists): ?>
-                                <tr><td colspan="3">No unpaid fees found for this ID.</td></tr>
+                                <tr><td colspan="4">No unpaid fees found for this ID.</td></tr>
                             <?php else: ?>
-                                <tr><td colspan="3">Student record for this ID does not exist.</td></tr>
+                                <tr><td colspan="4">Student record for this ID does not exist.</td></tr>
                             <?php endif ?>
                         <?php else: ?>
-                            <tr><td colspan="3">Please enter a Student ID to view fees.</td></tr>
+                            <tr><td colspan="4">Please enter a Student ID to view fees.</td></tr>
                         <?php endif; ?>
                     </tbody>
                 </table>

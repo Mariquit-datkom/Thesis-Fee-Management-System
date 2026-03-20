@@ -2,8 +2,6 @@
 require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
-$studentExists = false;
-
 function getStudentFees($studentId) {
     $inputFileName = 'assets/docs/spreadsheets/student_record.xlsm';
     
@@ -17,6 +15,7 @@ function getStudentFees($studentId) {
 
     $headers = $rows[2];
     $studentFees = [];
+    $studentExists = false;
 
     foreach ($rows as $index => $row) {
         if ($index === 0) continue; 
@@ -37,5 +36,8 @@ function getStudentFees($studentId) {
             break;
         }
     }
-    return $studentFees;
+    return [
+        'fees' => $studentFees,
+        'exists' => $studentExists
+    ];
 }
