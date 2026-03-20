@@ -1,15 +1,11 @@
 /**
- * Processes the payment by gathering the already computed balance
- * and the student details to send to the backend.
+ * Revised processPayment.js
+ * Captures detailed fee objects and sends them to handlePayment.php
  */
 function processPayment() {
-    // Grab the Student ID
     const studentId = document.getElementById('student-id').value;
-    
-    // Grab the balance already computed by otherPayments.js
     const totalToPay = document.getElementById('balance-display').innerText;
 
-    // Basic validation before sending
     if (!studentId) {
         alert("Please search for a Student ID first.");
         return;
@@ -20,18 +16,39 @@ function processPayment() {
         return;
     }
 
-    // Confirmation dialog
     if (confirm(`Proceed with payment of Php ${totalToPay} for Student ${studentId}?`)) {
         
+        // Collect Fixed Fees (Name and Amount)
+        const fixedFees = Array.from(document.querySelectorAll('.fee-checkbox:checked'))
+            .map(cb => {
+                const row = cb.closest('tr');
+                return {
+                    name: row.cells[0].innerText, // From payment.php table
+                    amount: cb.getAttribute('data-price') 
+                };
+            });
+
+        // Collect Other Payments (Name and Amount)
+        const otherPayments = Array.from(document.querySelectorAll('#other-payments-body tr'))
+            .map(row => {
+                const descInput = row.querySelector('.other-desc');
+                const amountInput = row.querySelector('.other-amount');
+                if (descInput && descInput.value.trim() !== "") {
+                    return {
+                        name: descInput.value,
+                        amount: amountInput.value || "0.00"
+                    };
+                }
+                return null;
+            }).filter(item => item !== null);
+
+        // Merge all line items for the receipt
+        const allItems = [...fixedFees, ...otherPayments];
+
         const payload = {
             studentId: studentId,
-            amountPaid: totalToPay,
-
-            fixedFees: Array.from(document.querySelectorAll('.fee-checkbox:checked'))
-                            .map(cb => cb.closest('tr').cells[0].innerText),
-
-            otherPayments: Array.from(document.querySelectorAll('.other-desc'))
-                                .map(input => input.value).filter(val => val !== "")
+            totalAmount: totalToPay,
+            items: allItems
         };
 
         fetch('handlePayment.php', {
@@ -42,15 +59,15 @@ function processPayment() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert("Payment Successful! Receipt sent via email.");
+                alert("Payment Successful! Receipt saved to assets/docs/receipts/");
                 location.reload(); 
             } else {
-                alert("Error processing payment: " + data.message);
+                alert("Error: " + data.message);
             }
         })
         .catch(err => {
             console.error("Payment Error:", err);
-            alert("A system error occurred. Please try again.");
+            alert("A system error occurred.");
         });
     }
 }
