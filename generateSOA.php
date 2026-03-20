@@ -33,6 +33,7 @@ try {
             if ($row[0] == $studentId) {
                 $name = strtoupper(($row[1] ?? '') . ", " . ($row[2] ?? '') . " " . ($row[3] ?? ''));
                 $yearCourse = "Grade " . ($row[4] ?? '') . " - " . ($row[5] ?? '');
+                $studentEmail = $row[6] ?? '';
                 break;
             }
         }
@@ -102,6 +103,38 @@ try {
     // CRITICAL: Clear the main buffer to remove any warnings/notices 
     // that might have leaked out during the spreadsheet loading
     ob_end_clean(); 
+
+    require_once 'mailHandler.php';
+
+    if (!empty($studentEmail)) {
+        $subject = "Statement of Account - " . $studentId;
+        $body = "
+            <div style='font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: auto; border: 1px solid #e0e0e0; border-top: 5px solid #d9534f; padding: 30px;'>
+                <div style='text-align: center; margin-bottom: 20px;'>
+                    <h2 style='color: #d9534f; margin: 0;'>Statement of Account</h2>
+                    <p style='font-size: 14px; color: #666;'>Colegio de Porta Vaga - Finance Office</p>
+                </div>
+
+                <div style='margin-bottom: 25px;'>
+                    <p>Dear <strong>$studentFullName</strong>,</p>
+                    <p>This is a formal notification regarding your outstanding balance for the current school term. Please find your detailed <strong>Statement of Account (SOA)</strong> attached to this email.</p>
+                </div>
+
+                <div style='background-color: #fdf2f2; border-left: 4px solid #d9534f; padding: 15px; margin-bottom: 25px;'>
+                    <p style='margin: 0; font-size: 15px;'><strong>Current Balance:</strong> Php " . number_format($total, 2) . "</p>
+                    <p style='margin: 5px 0 0 0; font-size: 13px; color: #555;'>Date Generated: " . date('jS \o\f F, Y') . "</p>
+                </div>
+
+                <p style='font-size: 14px;'>To avoid any inconvenience during exams or enrollment periods, we kindly request that you settle the remaining balance at the Finance Office at your earliest convenience.</p>
+
+                <div style='margin-top: 30px; padding-top: 15px; border-top: 1px solid #eee; font-size: 12px; color: #888;'>
+                    <p><em>Note: This is an automated billing notice. If you have already made a payment within the last 24 hours, please disregard this message.</em></p>
+                </div>
+            </div>
+            ";
+        
+        sendEmailWithAttachment($studentEmail, $name, $subject, $body, $savePath);
+    }
 
     header('Content-Type: application/json');
     echo json_encode([

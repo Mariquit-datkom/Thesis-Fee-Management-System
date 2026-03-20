@@ -48,6 +48,8 @@ try {
             $year = $sheet->getCell("E$row")->getValue();
             $strand = $sheet->getCell("F$row")->getValue();
             $yearStrand = is_null($strand) ? "Grade $year" : "Grade $year - $strand";
+
+            $studentEmail = $sheet->getCell("G$row")->getValue();
             break;
         }
     }
@@ -117,7 +119,7 @@ while (count($displayItems) < 3) {
 ob_start();
 $name = $studentFullName;
 $yearCourse = $yearStrand;
-$date = $dateOfPayment;
+$date = date('jS \o\f F, Y');
 $receiptItems = $displayItems;
 $total = $totalAmount;
 $referenceNumber = date('YmdHis');
@@ -134,6 +136,41 @@ try {
     $fileName = "{$studentId}-{$referenceNumber}.pdf";
     $fullPath = $savePath . $fileName;
     $mpdf->Output($fullPath, \Mpdf\Output\Destination::FILE);
+
+    require_once 'mailHandler.php';
+
+    if ($studentEmail) {
+        $subject = "Official Receipt - Ref #" . $referenceNumber;
+        
+        $body = "
+            <div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;'>
+                <div style='text-align: center; border-bottom: 2px solid #004a99; padding-bottom: 10px;'>
+                    <h2 style='color: #004a99; margin: 0;'>Colegio de Porta Vaga</h2>
+                    <p style='font-size: 12px; color: #777;'>Finance Office - Official Notification</p>
+                </div>
+
+                <div style='padding: 20px 0;'>
+                    <p>Dear <strong>$studentFullName</strong>,</p>
+                    <p>This is to confirm that your payment has been successfully processed and recorded in the school's Fee Management System.</p>
+                    
+                    <div style='background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;'>
+                        <p style='margin: 5px 0;'><strong>Transaction Reference:</strong> $referenceNumber</p>
+                        <p style='margin: 5px 0;'><strong>Date of Transaction:</strong> " . $date . "</p>
+                        <p style='margin: 5px 0;'><strong>Document Type:</strong> Official Receipt</p>
+                    </div>
+
+                    <p>Please find your electronic receipt attached to this email for your personal records and future reference.</p>
+                </div>
+
+                <div style='font-size: 12px; color: #888; border-top: 1px solid #eee; padding-top: 20px;'>
+                    <p><strong>Note:</strong> This is an automated message. If you did not authorize this transaction or believe this was sent in error, please visit the Finance Office immediately.</p>
+                    <p><em>Confidentiality Notice: This email and any files transmitted with it are confidential and intended solely for the use of the individual to whom they are addressed.</em></p>
+                </div>
+            </div>
+            ";
+        
+        sendEmailWithAttachment($studentEmail, $studentFullName, $subject, $body, $fullPath);
+    }
 
     echo json_encode([
         'success' => true, 
