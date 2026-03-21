@@ -1,3 +1,9 @@
+<?php
+    require_once 'syncCache.php';
+    getCachedData('info');
+    getCachedData('fees');
+?>
+
 <div class="header-container">
     <div class="left-header">
         <img src="assets/images/school_logo.png" alt="school-logo" class="school-logo">

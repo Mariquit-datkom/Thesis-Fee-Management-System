@@ -6,6 +6,9 @@ use League\OAuth2\Client\Provider\Google;
 
 require 'vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 function sendEmailWithAttachment($recipientEmail, $recipientName, $subject, $body, $attachmentPath) {
     $mail = new PHPMailer(true);
 

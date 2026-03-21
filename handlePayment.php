@@ -109,6 +109,11 @@ try {
     exit;
 }
 
+// Force immediate cache refresh for both files to ensure accuracy
+require_once 'syncCache.php';
+refreshFeesCache('assets/docs/spreadsheets/student_record.xlsm', 'assets/docs/spreadsheets/student_cache.json');
+refreshInfoCache('assets/docs/spreadsheets/student_info.xlsm', 'assets/docs/spreadsheets/info_cache.json');
+
 // --- 3. Prepare Receipt Rows (Ensuring at least 3 rows) ---
 $displayItems = $items;
 while (count($displayItems) < 3) {

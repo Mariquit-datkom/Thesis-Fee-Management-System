@@ -1,6 +1,7 @@
 <?php
 require_once 'x-head.php'; 
 require 'vendor/autoload.php';
+require_once 'syncCache.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -10,30 +11,7 @@ header("Pragma: no-cache");
 $currentPage = basename($_SERVER['PHP_SELF']);
 
 // --- Data Fetching Logic ---
-$students = [];
-$spreadsheetFile = 'assets/docs/spreadsheets/student_info.xlsm';
-
-if (file_exists($spreadsheetFile)) {
-    try {
-        $spreadsheet = IOFactory::load($spreadsheetFile);
-        $sheet = $spreadsheet->getActiveSheet();
-        $rows = $sheet->toArray();
-
-        // Start from index 3 (Row 4) as per handlePayment.php logic 
-        foreach ($rows as $index => $row) {
-            if ($index < 3 || empty($row[0])) continue; 
-
-            $students[] = [
-                'id'    => $row[0], // Column A
-                'name'  => strtoupper(($row[1] ?? '') . ", " . ($row[2] ?? '') . " " . ($row[3] ?? '')), // Col B, C, D
-                'year'  => $row[4] ?? 'N/A', // Column E
-                'course'=> $row[5] ?? 'N/A'  // Column F
-            ];
-        }
-    } catch (Exception $e) {
-        $error = "Error loading student records: " . $e->getMessage();
-    }
-}
+$students = getCachedData('info');
 ?>
 
 <!DOCTYPE html>
