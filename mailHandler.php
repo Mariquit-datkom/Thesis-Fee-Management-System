@@ -15,7 +15,8 @@ function sendEmailWithAttachment($recipientEmail, $recipientName, $subject, $bod
     try {
         // Server settings
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Hostname = 'gmail.com';
         $mail->Port = 587; // Use 465 for SSL or 587 for TLS
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->SMTPAuth = true;
@@ -50,7 +51,7 @@ function sendEmailWithAttachment($recipientEmail, $recipientName, $subject, $bod
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body    = $body;
-        $mail->XMailer = ' ';
+        $mail->AltBody = strip_tags($body);
 
         $mail->send();
         return true;

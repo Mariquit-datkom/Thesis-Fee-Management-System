@@ -107,31 +107,33 @@ try {
     require_once 'mailHandler.php';
 
     if (!empty($studentEmail)) {
-        $subject = "Statement of Account - " . $studentId;
+        $subject = "Update: Student Account Record for $name ($studentId)";
+
         $body = "
-            <div style='font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: auto; border: 1px solid #e0e0e0; border-top: 5px solid #d9534f; padding: 30px;'>
-                <div style='text-align: center; margin-bottom: 20px;'>
-                    <h2 style='color: #d9534f; margin: 0;'>Statement of Account</h2>
-                    <p style='font-size: 14px; color: #666;'>Colegio de Porta Vaga - Finance Office</p>
+            <div style='font-family: Arial, sans-serif; line-height: 1.6; color: #444; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eeeeee;'>
+                <div style='margin-bottom: 20px;'>
+                    <h2 style='color: #2c3e50;'>Finance Office Update</h2>
+                    <p style='font-size: 14px;'>Colegio de Porta Vaga</p>
                 </div>
 
-                <div style='margin-bottom: 25px;'>
-                    <p>Dear <strong>$studentFullName</strong>,</p>
-                    <p>This is a formal notification regarding your outstanding balance for the current school term. Please find your detailed <strong>Statement of Account (SOA)</strong> attached to this email.</p>
+                <p>Hello <strong>$name</strong>,</p>
+                
+                <p>Please find the updated record of your student account for the current term attached to this email as a PDF document.</p>
+
+                <div style='background-color: #f9f9f9; padding: 15px; border: 1px solid #dddddd; margin: 20px 0;'>
+                    <p style='margin: 0;'><strong>Account Summary:</strong></p>
+                    <p style='margin: 5px 0;'>Amount: Php " . number_format($total, 2) . "</p>
+                    <p style='margin: 0; font-size: 12px; color: #777;'>Generated on: " . date('F j, Y') . "</p>
                 </div>
 
-                <div style='background-color: #fdf2f2; border-left: 4px solid #d9534f; padding: 15px; margin-bottom: 25px;'>
-                    <p style='margin: 0; font-size: 15px;'><strong>Current Balance:</strong> Php " . number_format($total, 2) . "</p>
-                    <p style='margin: 5px 0 0 0; font-size: 13px; color: #555;'>Date Generated: " . date('jS \o\f F, Y') . "</p>
-                </div>
+                <p style='font-size: 13px;'>If you have any questions regarding your account details, you may visit the Finance Office during regular school hours.</p>
 
-                <p style='font-size: 14px;'>To avoid any inconvenience during exams or enrollment periods, we kindly request that you settle the remaining balance at the Finance Office at your earliest convenience.</p>
-
-                <div style='margin-top: 30px; padding-top: 15px; border-top: 1px solid #eee; font-size: 12px; color: #888;'>
-                    <p><em>Note: This is an automated billing notice. If you have already made a payment within the last 24 hours, please disregard this message.</em></p>
-                </div>
+                <p style='font-size: 11px; color: #999; margin-top: 30px;'>
+                    This is an automated administrative update from CDPV. 
+                    If you have recently settled your account, please keep this for your personal records.
+                </p>
             </div>
-            ";
+        ";
         
         sendEmailWithAttachment($studentEmail, $name, $subject, $body, $savePath);
     }
