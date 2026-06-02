@@ -74,6 +74,7 @@ try {
         $feeName = trim($paidItem['name']);
         $paymentAmount = floatval($paidItem['amount']);
         $isFull = $paidItem['isFull'] ?? false;
+        $studentRowIndex += 1;
         
         for ($col = 'A'; $col <= $highestColumn; $col++) {
             $headerValue = trim($sheet->getCell($col . "3")->getValue());
@@ -111,8 +112,8 @@ try {
 
 // Force immediate cache refresh for both files to ensure accuracy
 require_once 'syncCache.php';
-refreshFeesCache('assets/docs/spreadsheets/student_record.xlsm', 'assets/docs/spreadsheets/student_cache.json');
-refreshInfoCache('assets/docs/spreadsheets/student_info.xlsm', 'assets/docs/spreadsheets/info_cache.json');
+refreshFeesCache('assets/docs/spreadsheets/student_record.xlsm', 'assets/docs/cache/student_record_cache.json');
+refreshInfoCache('assets/docs/spreadsheets/student_info.xlsm', 'assets/docs/cache/student_info_cache.json');
 
 // --- 3. Prepare Receipt Rows (Ensuring at least 3 rows) ---
 $displayItems = $items;
